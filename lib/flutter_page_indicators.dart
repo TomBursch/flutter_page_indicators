@@ -218,7 +218,7 @@ class _PageIndicatorState extends State<PageIndicator> {
 
   BasePainter _createPainter() {
     final ctrl = widget.controller;
-    final page = ctrl.page ?? ctrl.initialPage?.toDouble() ?? 0.0;
+    final page = (ctrl.hasClients?ctrl.page:null)??ctrl.initialPage?.toDouble()??0.0;
 
     switch (widget.layout) {
       case PageIndicatorLayout.NONE:
@@ -261,7 +261,8 @@ class _PageIndicatorState extends State<PageIndicator> {
   }
 
   void _onController() {
-    double page = widget.controller.page ?? 0.0;
+    final ctrl = widget.controller;
+    final page = (ctrl.hasClients?ctrl.page:null)??ctrl.initialPage?.toDouble()??0.0;
     index = page.floor();
 
     setState(() {});
