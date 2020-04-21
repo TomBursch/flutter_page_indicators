@@ -218,10 +218,11 @@ class _PageIndicatorState extends State<PageIndicator> {
 
   BasePainter _createPainter() {
     final ctrl = widget.controller;
-    var page = ctrl.initialPage?.toDouble() ?? 0.0;
+    var page;
     try {
       page = (ctrl.hasClients) ? ctrl.page : page;
     } catch (_) {}
+    page = page ?? ctrl.initialPage?.toDouble() ?? 0.0;
 
     switch (widget.layout) {
       case PageIndicatorLayout.NONE:
@@ -269,9 +270,10 @@ class _PageIndicatorState extends State<PageIndicator> {
     try {
       page = (ctrl.hasClients) ? ctrl.page : page;
     } catch (_) {}
-    index = page.floor();
 
-    setState(() {});
+    setState(() {
+      index = page.floor();
+    });
   }
 
   @override
@@ -288,10 +290,11 @@ class _PageIndicatorState extends State<PageIndicator> {
     }
     if (widget.count != oldWidget.count) {
       final ctrl = widget.controller;
-      var page = ctrl.initialPage?.toDouble() ?? 0.0;
+      var page;
       try {
         page = (ctrl.hasClients) ? ctrl.page : page;
       } catch (_) {}
+      page = page ?? ctrl.initialPage?.toDouble() ?? 0.0;
       index = page.floor();
     }
     super.didUpdateWidget(oldWidget);
